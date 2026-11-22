@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Launch-Odds Radar — token-radar-01</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>Launch-Odds Radar</h1>
+    <p class="sub">Which pre-token protocol is worth farming, and what its token would be worth if it launched — priced from the snapshot's own figures, never from a list of names.</p>
+  </div>
+  <div class="meta"><span id="asof"></span><span id="src"></span></div>
+</header>
+
+<section id="kpis" aria-label="Headline figures"></section>
+
+<section class="panel">
+  <h2>The board <span class="count" id="board-count"></span></h2>
+  <p class="hint" id="acct"></p>
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search name or slug…" aria-label="Search">
+    <div class="filters" id="verdict-filters">
+      <button data-v="All" class="on">All</button>
+      <button data-v="Farm">Farm</button>
+      <button data-v="Thin">Thin</button>
+      <button data-v="Skip">Skip</button>
+    </div>
+    <label class="check"><input id="watchonly" type="checkbox"> Watchlist only</label>
+    <select id="sort" aria-label="Sort by">
+      <option value="ev">Sort: expected value</option>
+      <option value="terminal">Sort: terminal value</option>
+      <option value="odds">Sort: launch odds</option>
+      <option value="tvl">Sort: TVL</option>
+      <option value="growth">Sort: 7-day change</option>
+      <option value="age">Sort: age</option>
+      <option value="name">Sort: name A–Z</option>
+    </select>
+  </div>
+  <div class="table-wrap">
+    <table id="board">
+      <thead><tr>
+        <th data-k="rank">#</th><th data-k="name">Protocol</th><th data-k="tvl">TVL</th>
+        <th data-k="growth">7d</th><th data-k="terminal">Terminal value</th>
+        <th data-k="odds">Launch odds</th><th data-k="ev">Expected value</th>
+        <th data-k="verdict">Verdict</th><th>Deposit</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <p class="hint">Click any row for its detail view and six-step farm plan. Expected value = terminal value × launch odds.</p>
+</section>
+
+<section class="panel" id="detail" hidden>
+  <h2 id="detail-title"></h2>
+  <div id="detail-body"></div>
+  <h3>Farm plan — six costed steps</h3>
+  <ol id="detail-steps"></ol>
+  <p class="warn">A farm plan is a plan, not a promise: no snapshot proves a token is coming, and never pay anyone to claim.</p>
+</section>
+
+<section class="panel" id="model">
+  <h2>How the price is fitted</h2>
+  <p id="model-text"></p>
+  <p id="odds-text"></p>
+  <p id="holdout-text"></p>
+  <p class="warn" id="stability-text"></p>
+  <table id="accounting" aria-label="Accounting of all protocols"></table>
+</section>
+
+<section class="panel">
+  <h2>Already trading — the market's own values</h2>
+  <p>These protocols record a token, so the board does not rank them: their market cap is the market's answer, not a model's. Shown to keep the pre-token board honest.</p>
+  <div class="table-wrap">
+    <table id="live">
+      <thead><tr><th>Protocol</th><th>Category</th><th>TVL</th><th>Market cap</th><th>7d</th></tr></thead>
+      <tbody id="live-rows"></tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p>Model radar-v4. Every figure on this page is computed from the sealed snapshot at run time: peer multiples, grid coefficients, launch odds, hold-outs and verdicts. No protocol name is special-cased. Snapshot source: <span id="src2"></span></p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
